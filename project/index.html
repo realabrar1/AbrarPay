@@ -1,13 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Abrar-Pay - UPI Payment Link Generator</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Abrar-Pay</h1>
+        <p class="subtitle">Shareable Payment's Link for UPI</p>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab(0)">Create</button>
+            <button class="tab" onclick="switchTab(1)">Pay</button>
+        </div>
+
+        <div class="panel active">
+            <div class="form-group">
+                <label for="upiId">Enter Your VPA (UPI ID) or Phone Number</label>
+                <input type="text" id="upiId" placeholder="example@upi or 10-digit number">
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount (Optional)</label>
+                <div class="input-wrapper">
+                    <span class="currency-symbol">₹</span>
+                    <input type="number" id="amount" placeholder="0">
+                </div>
+            </div>
+
+            <button class="btn btn-primary" id="generateBtn">CREATE</button>
+        </div>
+
+        <div class="panel">
+            <div class="qr-container">
+                <div class="qr-wrapper">
+                    <canvas id="qrcode"></canvas>
+                </div>
+                <p class="text-sm text-gray-400">Scan with any UPI app to pay</p>
+                <p>You are paying <span id="paymentAmount">custom amount</span></p>
+                <p class="text-gray-400">to</p>
+                <p id="paymentUpiId" class="text-sm"></p>
+            </div>
+
+            <button class="btn btn-success" id="payBtn">PAY</button>
+            <button class="btn btn-share btn-primary" id="shareBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
+                </svg>
+                Share Payment Link
+            </button>
+        </div>
+
+        <footer>
+            <p>If you have any questions about security or privacy,</p>
+            <a href="https://www.linkedin.com/in/syed-shoaib-abrar-a33561201/">Connect to Abrar</a>
+            <p class="mt-4 text-lg font-semibold"># Go Cashless</p>
+        </footer>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="script.js"></script>
+</body>
 </html>
